@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace VideoRentalApplication.Models
+{
+    public class Customer
+    {
+        public int Id { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string Name { get; set; }
+        public bool IsSubscribeToNewsLetter { get; set; }
+        [Display(Name = "Date of Birth")]
+        public DateTime? DateOfBirth { get; set; }
+        public byte MembershiptTypeId{ get; set; } 
+        public MembershiptType MembershiptType { get; set; }
+    }
+}

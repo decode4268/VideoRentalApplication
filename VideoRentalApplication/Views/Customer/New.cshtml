@@ -1,0 +1,28 @@
+﻿@model VideoRentalApplication.Models.Customer
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New Customer</h2>
+
+<div>
+    <div class="from-group">
+        @Html.LabelFor(c => c.Name)
+        @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Name)
+    </div>
+    <div class="from-group">
+        @Html.LabelFor(c => c.DateOfBirth)
+        @Html.TextBoxFor(c => c.DateOfBirth, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.DateOfBirth)
+    </div>
+    <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(c => c.IsSubscribeToNewsLetter) Is Subscribe To Newsletter?
+            </label>
+    </div>
+    <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-success" />
+            @Html.ActionLink("Bank To List", "Index", "", new {@class="btn btn-success"})
+    </div>
+</div>

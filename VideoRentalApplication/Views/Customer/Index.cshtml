@@ -1,0 +1,35 @@
+﻿@model IEnumerable<VideoRentalApplication.Models.Customer>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Customer List</h2>
+
+@Html.ActionLink("New Customer", "New", "", new { @class = "btn btn-success" })
+
+<br />
+<br />
+
+
+<div>
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Membershipt Type</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(@customer.Name, "Edit", new { id = customer.Id })</td>
+                    <td>@customer.MembershiptType.Name</td>
+                    <td>@Html.ActionLink("Delete", "Delete", new {id=customer.Id})</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
