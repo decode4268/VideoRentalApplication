@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 using VideoRentalApplication.Models;
@@ -32,12 +33,51 @@ namespace VideoRentalApplication.Controllers
 
             return View(customerList);
         }
-        public ViewResult New()
+        public ViewResult CustomerForm()
         {
             var custFormVm = new CustomerFormViewModel();
             custFormVm.Customer = new Customer();
             custFormVm.MembershiptTypes = _context.MembershiptTypes.ToList();
             return View(custFormVm);
+        }
+        [HttpPost]
+        public ActionResult Save(CustomerFormViewModel customerFormViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                var custFormVm = new CustomerFormViewModel();
+                custFormVm.Customer = new Customer();
+                custFormVm.MembershiptTypes = _context.MembershiptTypes.ToList();
+                return View("CustomerForm", custFormVm);
+            }
+            if (customerFormViewModel.Customer.Id == 0)
+            {
+                _context.Customers.Add(customerFormViewModel.Customer);
+            }
+            else
+            {
+                var customerInDb = _context.Customers.FirstOrDefault(c => c.Id == customerFormViewModel.Customer.Id);
+                if (customerInDb == null)
+                    return HttpNotFound();
+                customerInDb.Name = customerFormViewModel.Customer.Name;
+                customerInDb.MembershipTypeId = customerFormViewModel.Customer.MembershipTypeId;
+                customerInDb.DateOfBirth = customerFormViewModel.Customer.DateOfBirth;
+                customerInDb.IsSubscribeToNewsLetter = customerFormViewModel.Customer.IsSubscribeToNewsLetter;
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult Edit(int Id)
+        {
+            var customerInDb = _context.Customers.FirstOrDefault(c => c.Id == Id);
+            if (customerInDb == null)
+                return HttpNotFound();
+            var customformVM = new CustomerFormViewModel();
+            customformVM.Customer = customerInDb;
+            customformVM.MembershiptTypes = _context.MembershiptTypes.ToList();
+            return View("CustomerForm", customformVM);
         }
     }
 }
