@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Web;
+using System.Web.Management;
 using System.Web.Mvc;
 using VideoRentalApplication.Models;
 using VideoRentalApplication.ViewModel;
@@ -16,7 +18,7 @@ namespace VideoRentalApplication.Controllers
 
         public CustomerController()
         {
-             _context = new ApplicationDbContext();
+            _context = new ApplicationDbContext();
         }
         protected override void Dispose(bool disposing)
         {
@@ -78,6 +80,18 @@ namespace VideoRentalApplication.Controllers
             customformVM.Customer = customerInDb;
             customformVM.MembershiptTypes = _context.MembershiptTypes.ToList();
             return View("CustomerForm", customformVM);
+        }
+
+        public ActionResult Delete(int Id)
+        {
+            var customData = _context.Customers.FirstOrDefault(x => x.Id == Id);
+            if (customData != null)
+            {
+                _context.Customers.Remove(customData);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return HttpNotFound();
         }
     }
 }

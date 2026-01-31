@@ -12,10 +12,13 @@ else
     <h2>Edit Customer</h2>
 }
 
-@using (Html.BeginForm("Save", "Customer", FormMethod.Post))
+<div>
+    @using (Html.BeginForm("Save", "Customer", FormMethod.Post))
 
-{
-    <div>
+    {
+        @Html.AntiForgeryToken();
+        @Html.HiddenFor(c => c.Customer.Id)
+
         <div class="from-group">
             @Html.LabelFor(c => c.Customer.Name)
             @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control" })
@@ -30,7 +33,7 @@ else
         </div>
         <div class="from-group">
             @Html.LabelFor(c => c.Customer.DateOfBirth)
-            @Html.TextBoxFor(c => c.Customer.DateOfBirth, new { @class = "form-control" })
+            @Html.EditorFor(c => c.Customer.DateOfBirth, new { htmlAttributes = new { @class = "datepicker" } })
             @Html.ValidationMessageFor(c => c.Customer.DateOfBirth, null, new { @class = "text-danger" })
         </div>
         <div class="checkbox">
@@ -42,11 +45,21 @@ else
             <input type="submit" value="Submit" class="btn btn-success" />
             @Html.ActionLink("Bank To List", "Index", "", new { @class = "btn btn-success" })
         </div>
-    </div>
-}
+    }
+</div>
 
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 @section Scripts{
 
-    @Scripts.Render("~/bundles/jquery")
+    <script>
+        $(document).ready(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd-mm-yy",
+                changemonth: true,
+                changeyear: true
+            });
+        });
+    </script>
+    @*@Scripts.Render("~/bundles/jquery")*@
 
 }
