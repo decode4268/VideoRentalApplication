@@ -12,8 +12,11 @@ namespace VideoRentalApplication.Models
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
-        public bool IsSubscribeToNewsLetter { get; set; }
+        public bool IsSubscribeToNewsLetter { get; set; }  
+        [Required]
         [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
+        [IsMember18YearOld]
         public DateTime? DateOfBirth { get; set; }
         [Display(Name="MemberShip Type")]
         public byte MembershipTypeId{ get; set; } 

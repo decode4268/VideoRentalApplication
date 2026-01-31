@@ -1,0 +1,49 @@
+﻿@model VideoRentalApplication.ViewModel.MovieFormViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+@if (Model.Movies.Id == 0)
+{
+    <h2>New Movie</h2>
+}
+else
+{
+    <h2>Edit Movie</h2>
+}
+
+<div>
+    @using (Html.BeginForm("Save", "Movie", FormMethod.Post))
+
+    {
+        @Html.AntiForgeryToken();
+        @Html.HiddenFor(c => c.Customer.Id)
+
+        <div class="from-group">
+            @Html.LabelFor(c => c.Customer.Name)
+            @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(c => c.Customer.Name, null, new { @class = "text-danger" })
+        </div>
+        <div class="from-group">
+            @Html.LabelFor(c => c.Customer.MembershipTypeId)
+            @Html.DropDownListFor(c => c.Customer.MembershipTypeId,
+                new SelectList(Model.MembershiptTypes, "Id", "Name"),
+                "Please select membershipt Type", new { @class = "form-control" })
+            @Html.ValidationMessageFor(c => c.Customer.MembershipTypeId, null, new { @class = "text-danger" })
+        </div>
+        <div class="from-group">
+            @Html.LabelFor(c => c.Customer.DateOfBirth)
+            @Html.EditorFor(c => c.Customer.DateOfBirth, new { htmlAttributes = new { @class = "datepicker" } })
+            @Html.ValidationMessageFor(c => c.Customer.DateOfBirth, null, new { @class = "text-danger" })
+        </div>
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(c => c.Customer.IsSubscribeToNewsLetter) Is Subscribe To Newsletter?
+            </label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-success" />
+            @Html.ActionLink("Bank To List", "Index", "", new { @class = "btn btn-success" })
+        </div>
+    }
+</div>

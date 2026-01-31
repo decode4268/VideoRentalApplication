@@ -172,6 +172,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -183,16 +184,28 @@
     <Compile Include="Migrations\202601310901248_dataModify.Designer.cs">
       <DependentUpon>202601310901248_dataModify.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202601311659219_moviesandGenreTlbAdded.cs" />
+    <Compile Include="Migrations\202601311659219_moviesandGenreTlbAdded.Designer.cs">
+      <DependentUpon>202601311659219_moviesandGenreTlbAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202601311701191_populateGenre.cs" />
+    <Compile Include="Migrations\202601311701191_populateGenre.Designer.cs">
+      <DependentUpon>202601311701191_populateGenre.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\IsMember18YearOld.cs" />
     <Compile Include="Models\MembershiptType.cs" />
+    <Compile Include="Models\Movie.cs" />
     <Compile Include="ViewModel\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModel\CustomerFormViewModel.cs" />
     <Compile Include="ViewModel\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\MovieFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -312,6 +325,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\CustomerForm.cshtml" />
+    <Content Include="Views\Movie\MovieForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -349,6 +363,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202601310901248_dataModify.resx">
       <DependentUpon>202601310901248_dataModify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202601311659219_moviesandGenreTlbAdded.resx">
+      <DependentUpon>202601311659219_moviesandGenreTlbAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202601311701191_populateGenre.resx">
+      <DependentUpon>202601311701191_populateGenre.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
