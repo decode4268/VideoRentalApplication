@@ -73,7 +73,7 @@ namespace VideoRentalApplication.Controllers
             if (customerInDb == null)
                 return HttpNotFound();
             var movieFormVm = new MovieFormViewModel();
-            movieFormVm.Movies = new Movie();
+            movieFormVm.Movies = customerInDb;
             movieFormVm.Genres = _context.Genres.ToList();
             return View("MovieForm", movieFormVm);
         }

@@ -13,9 +13,11 @@ namespace VideoRentalApplication.Models
         public string Name { get; set; }
         [Required]
         [Display(Name = "Added Date")]
+        [DataType(DataType.Date)]
         public DateTime AddedDate { get; set; }
         [Required]
         [Display(Name = "Release Date")]
+        [DataType(DataType.Date)]
         public DateTime? ReleaseDate { get; set; }
         [Required]
         [Display(Name = "Number In Stock")]
