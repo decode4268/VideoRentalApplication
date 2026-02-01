@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36705.20 d17.14
+VisualStudioVersion = 17.14.36705.20
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoRentalApplication", "VideoRentalApplication\VideoRentalApplication.csproj", "{7779A113-D7F5-45E8-B2FB-B12CDB97DFD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIFundamenta", "WebAPIFundamenta\WebAPIFundamenta.csproj", "{F957BA9E-7C7D-4F75-9932-F682D92385B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7779A113-D7F5-45E8-B2FB-B12CDB97DFD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7779A113-D7F5-45E8-B2FB-B12CDB97DFD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7779A113-D7F5-45E8-B2FB-B12CDB97DFD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F957BA9E-7C7D-4F75-9932-F682D92385B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F957BA9E-7C7D-4F75-9932-F682D92385B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F957BA9E-7C7D-4F75-9932-F682D92385B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F957BA9E-7C7D-4F75-9932-F682D92385B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
