@@ -6,6 +6,9 @@ using System.Web.Http;
 using System.Data.Entity;
 using VideoRentalApplication.Models;
 using Microsoft.Ajax.Utilities;
+using VideoRentalApplication.Model;
+using AutoMapper;
+using VideoRentalApplication.DTO;
 
 namespace VideoRentalApplication.APIController
 {
@@ -23,10 +26,19 @@ namespace VideoRentalApplication.APIController
         }
 
         // GET :   /api/Customers
+        //[HttpGet]
+        //public List<Customer> GetAllCustomers()
+        //{
+        //    return _context.Customers.Include(x => x.MembershipType).ToList();
+        //}
+
         [HttpGet]
-        public List<Customer> GetAllCustomers()
+        public IHttpActionResult GetAllCustomer()
         {
-            return _context.Customers.Include(x => x.MembershipType).ToList();
+            var customerDTO = _context.Customers.Include(x => x.MembershipType).ToList()
+                .Select(Mapper.Map<Customer, CustomerDTO>);
+
+            return Ok(customerDTO);
         }
 
         // GET : /api/Customers/1
@@ -38,33 +50,35 @@ namespace VideoRentalApplication.APIController
 
         // POST : /api/Customers
         [HttpPost]
-        public IHttpActionResult CreateCustomer(Customer customer)
+        public IHttpActionResult CreateCustomer(CustomerDTO customerDto)
         {
-            if (!ModelState.IsValid || customer == null)
+            if (!ModelState.IsValid || customerDto == null)
                 return BadRequest();
-            _context.Customers.Add(customer);
+            var customerData = Mapper.Map<CustomerDTO, Customer>(customerDto);
+            _context.Customers.Add(customerData);
             _context.SaveChanges();
-            return Created(new Uri(Request.RequestUri + "/" + customer.Id), customer);
+            return Created(new Uri(Request.RequestUri + "/" + customerDto.Id), customerDto);
 
         }
 
         // PUT : /api/Customer/1
 
         [HttpPut]
-        public void UpdateCustomer(Customer customer)
+        public void UpdateCustomer(CustomerDTO customerDTO)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
-            if(customer.Id == 0)
+            if(customerDTO.Id == 0)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
-            var customerInDb = _context.Customers.FirstOrDefault(x => x.Id == customer.Id);
+            var customerInDb = _context.Customers.FirstOrDefault(x => x.Id == customerDTO.Id);
             //var data = _context.Customers.Where(x => x.Id == customer.Id).FirstOrDefault();
             if (customerInDb != null)
             {
-                customerInDb.Name = customer.Name;
-                customerInDb.MembershipTypeId = customer.MembershipTypeId;
-                customer.IsSubscribeToNewsLetter = customer.IsSubscribeToNewsLetter;
-                customerInDb.DateOfBirth = customer.DateOfBirth;
+                Mapper.Map(customerDTO, customerInDb);
+                //customerInDb.Name = customer.Name;
+                //customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                //customer.IsSubscribeToNewsLetter = customer.IsSubscribeToNewsLetter;
+                //customerInDb.DateOfBirth = customer.DateOfBirth;
                 _context.SaveChanges();
             }
         }

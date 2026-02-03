@@ -7,6 +7,7 @@ using System.Security.Policy;
 using System.Web;
 using System.Web.Management;
 using System.Web.Mvc;
+using VideoRentalApplication.Model;
 using VideoRentalApplication.Models;
 using VideoRentalApplication.ViewModel;
 
