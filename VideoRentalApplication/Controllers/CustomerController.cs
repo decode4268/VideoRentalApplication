@@ -30,11 +30,12 @@ namespace VideoRentalApplication.Controllers
         {
             //var customerList = _context.Customers.ToList();
             //var customerList = _context.Customers.Include(c => c.MembershiptTypeId).ToList();
-            var customerList = _context.Customers
-                           .Include(c => c.MembershipType) // navigation property
-                           .ToList();
+            //var customerList = _context.Customers
+            //               .Include(c => c.MembershipType) // navigation property
+            //               .ToList();
 
-            return View(customerList);
+            //return View(customerList);
+            return View();
         }
         public ViewResult CustomerForm()
         {

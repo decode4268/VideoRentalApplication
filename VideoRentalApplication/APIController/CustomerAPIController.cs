@@ -33,7 +33,8 @@ namespace VideoRentalApplication.APIController
         //}
 
         [HttpGet]
-        public IHttpActionResult GetAllCustomer()
+        [Route("api/CustomerAPI/AllCustomer")]
+        public IHttpActionResult AllCustomer()
         {
             var customerDTO = _context.Customers.Include(x => x.MembershipType).ToList()
                 .Select(Mapper.Map<Customer, CustomerDTO>);
@@ -43,7 +44,8 @@ namespace VideoRentalApplication.APIController
 
         // GET : /api/Customers/1
         [HttpGet]
-        public Customer GetCustomer(int id)
+        [Route("api/CustomerAPI/{id}")]
+        public Customer GetCustomerById(int? id)
         {
             return _context.Customers.FirstOrDefault(c => c.Id == id);
         }

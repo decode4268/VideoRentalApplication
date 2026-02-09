@@ -1,9 +1,11 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Video Rental</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -22,7 +24,7 @@
                     <li>@Html.ActionLink("Customers", "Index", "Customer", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Movies", "Index", "Movie", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
-                 @Html.Partial("_LoginPartial")
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </nav>
@@ -34,7 +36,9 @@
         </footer>
     </div>
 
+
     @Scripts.Render("~/bundles/jquery")
+    <script src="https://cdn.datatables.net/2.3.7/js/dataTables.js"></script>
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
