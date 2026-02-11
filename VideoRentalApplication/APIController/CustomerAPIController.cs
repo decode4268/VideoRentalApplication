@@ -87,6 +87,7 @@ namespace VideoRentalApplication.APIController
 
         // DELETE : api/Customers/1
         [HttpDelete]
+        [Route("api/CustomerAPI/{id}")]
         public void DeleteCustomer(int id)
         {
             var customerInDb = _context.Customers.FirstOrDefault(c => c.Id == id);
