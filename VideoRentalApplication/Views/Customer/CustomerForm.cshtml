@@ -13,32 +13,32 @@ else
 }
 
 <div>
-    @using (Html.BeginForm("Save", "Customer", FormMethod.Post))
+    @using (Html.BeginForm("", "", FormMethod.Post, new {id="customerForm"}))
 
     {
         @Html.AntiForgeryToken();
-        @Html.HiddenFor(c => c.Customer.Id)
+        @Html.HiddenFor(c => c.Customer.Id, new {id="Customer_Id"})
 
         <div class="from-group">
             @Html.LabelFor(c => c.Customer.Name)
-            @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control" })
+            @Html.TextBoxFor(c => c.Customer.Name, new { @class = "form-control", id="Name" })
             @Html.ValidationMessageFor(c => c.Customer.Name, null, new { @class = "text-danger" })
         </div>
         <div class="from-group">
             @Html.LabelFor(c => c.Customer.MembershipTypeId)
             @Html.DropDownListFor(c => c.Customer.MembershipTypeId,
                 new SelectList(Model.MembershiptTypes, "Id", "Name"),
-                "Please select membershipt Type", new { @class = "form-control" })
+                "Please select membershipt Type", new { @class = "form-control", id ="MembershipTypeId" })
             @Html.ValidationMessageFor(c => c.Customer.MembershipTypeId, null, new { @class = "text-danger" })
         </div>
         <div class="from-group">
             @Html.LabelFor(c => c.Customer.DateOfBirth)
-            @Html.EditorFor(c => c.Customer.DateOfBirth, new { htmlAttributes = new { @class = "datepicker" } })
+            @Html.EditorFor(c => c.Customer.DateOfBirth, new { htmlAttributes = new { @class = "datepicker", id="DateOfBirth" } })
             @Html.ValidationMessageFor(c => c.Customer.DateOfBirth, null, new { @class = "text-danger" })
         </div>
         <div class="checkbox">
             <label>
-                @Html.CheckBoxFor(c => c.Customer.IsSubscribeToNewsLetter) Is Subscribe To Newsletter?
+                @Html.CheckBoxFor(c => c.Customer.IsSubscribeToNewsLetter, new {id="IsSubscribeToNewsLetter"}) Is Subscribe To Newsletter?
             </label>
         </div>
         <div class="form-group">
@@ -59,6 +59,32 @@ else
                 changeyear: true
             });
         });
+
+        $("#customerForm").on("submit", function (e) {
+            e.preventDefault(); // stops the normal MVC postback.
+            var customerDto = {
+                id: $("#Customer_Id").val(),
+                name: $("#Name").val(),
+                isSubscribeToNewsLetter: $("#IsSubscribeToNewsLetter").is(":checked"),
+                membershipTypeId: $("#MembershipTypeId").val(),
+                dateOfBirth: $("#DateOfBirth").val()
+
+            };
+            var jsonData = JSON.stringify(customerDto);
+            console.log(jsonData);
+            $.ajax({
+                url: '/api/CustomerAPI/CreateCustomer',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(customerDto),
+                success: function (response) {
+                    alert("Data Added Successfully!");
+                }, 
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        })
     </script>
     @*@Scripts.Render("~/bundles/jquery")*@
 

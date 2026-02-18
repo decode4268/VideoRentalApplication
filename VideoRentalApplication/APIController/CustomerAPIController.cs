@@ -52,6 +52,7 @@ namespace VideoRentalApplication.APIController
 
         // POST : /api/Customers
         [HttpPost]
+        [Route("api/CustomerAPI/CreateCustomer")]
         public IHttpActionResult CreateCustomer(CustomerDTO customerDto)
         {
             if (!ModelState.IsValid || customerDto == null)
