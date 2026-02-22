@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using VideoRentalApplication.Models;
 using System.Data.Entity;
 using VideoRentalApplication.ViewModel;
+using VideoRentalApplication.Helper;
 
 namespace VideoRentalApplication.Controllers
 {
+
     public class MovieController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,9 +27,15 @@ namespace VideoRentalApplication.Controllers
         public ActionResult Index()
         {
             var movieList = _context.Movies
-                           .Include(c => c.Genre) // navigation property
-                           .ToList();
-            return View(movieList);
+                   .Include(c => c.Genre) // navigation property
+                   .ToList();
+            if (User.IsInRole(RoleName.Admin))
+            {
+
+                return View(movieList);
+            }
+            return View("ReadOnly", movieList);
+
         }
         public ViewResult MovieForm()
         {
@@ -44,7 +52,7 @@ namespace VideoRentalApplication.Controllers
                 var movieFormVm = new MovieFormViewModel();
                 movieFormVm.Movies = new Movie();
                 movieFormVm.Genres = _context.Genres.ToList();
-                return View("MovieForm",movieFormVm);
+                return View("MovieForm", movieFormVm);
             }
             if (customerFormViewModel.Movies.Id == 0)
             {
@@ -60,7 +68,7 @@ namespace VideoRentalApplication.Controllers
                 customerInDb.AddedDate = customerFormViewModel.Movies.AddedDate;
                 customerInDb.ReleaseDate = customerFormViewModel.Movies.ReleaseDate;
                 customerInDb.NumberInStock = customerFormViewModel.Movies.NumberInStock;
-                
+
             }
             _context.SaveChanges();
             return RedirectToAction("Index");

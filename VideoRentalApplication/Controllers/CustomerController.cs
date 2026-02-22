@@ -37,6 +37,7 @@ namespace VideoRentalApplication.Controllers
             //return View(customerList);
             return View();
         }
+     
         public ViewResult CustomerForm()
         {
             var custFormVm = new CustomerFormViewModel();

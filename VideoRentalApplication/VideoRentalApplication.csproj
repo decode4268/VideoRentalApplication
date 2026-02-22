@@ -194,6 +194,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\RoleName.cs" />
     <Compile Include="Migrations\202601281553336_intial.cs" />
     <Compile Include="Migrations\202601281553336_intial.Designer.cs">
       <DependentUpon>202601281553336_intial.cs</DependentUpon>
@@ -209,6 +210,10 @@
     <Compile Include="Migrations\202601311701191_populateGenre.cs" />
     <Compile Include="Migrations\202601311701191_populateGenre.Designer.cs">
       <DependentUpon>202601311701191_populateGenre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202602191645290_populateUserAccounts.cs" />
+    <Compile Include="Migrations\202602191645290_populateUserAccounts.Designer.cs">
+      <DependentUpon>202602191645290_populateUserAccounts.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -345,6 +350,7 @@
     <Content Include="Views\Customer\CustomerForm.cshtml" />
     <Content Include="Views\Movie\MovieForm.cshtml" />
     <Content Include="Views\Movie\Index.cshtml" />
+    <Content Include="Views\Movie\ReadOnly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -388,6 +394,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202601311701191_populateGenre.resx">
       <DependentUpon>202601311701191_populateGenre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202602191645290_populateUserAccounts.resx">
+      <DependentUpon>202602191645290_populateUserAccounts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
